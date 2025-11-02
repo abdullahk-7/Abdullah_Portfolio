@@ -102,8 +102,8 @@ const Contact: React.FC = () => {
   ];
 
   const services = [
+    'Hiring',
     'SOC Monitoring & Analysis',
-    'Threat Hunting',
     'Vulnerability Assessment',
     'Penetration Testing',
     'Incident Response',
@@ -287,8 +287,8 @@ const Contact: React.FC = () => {
                       className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-cyan-400 focus:outline-none transition-colors duration-200"
                     >
                       <option value="">Select a subject</option>
+                      <option value="Hiring">Hiring</option>
                       <option value="soc-monitoring">SOC Monitoring Services</option>
-                      <option value="threat-hunting">Threat Hunting</option>
                       <option value="vulnerability-assessment">Vulnerability Assessment</option>
                       <option value="penetration-testing">Penetration Testing</option>
                       <option value="incident-response">Incident Response</option>
