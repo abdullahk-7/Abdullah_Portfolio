@@ -111,7 +111,7 @@ const Certifications: React.FC = () => {
             >
               <div className="relative">
                 <img
-                  src={cert.image || cert.badge}
+                  src={cert.image}
                   alt={cert.name}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                 />
@@ -216,7 +216,7 @@ const Certifications: React.FC = () => {
               <div className="bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
                 <div className="overflow-auto max-h-[90vh]">
                   <img
-                    src={certifications[selectedCert]?.image || certifications[selectedCert]?.badge}
+                    src={certifications[selectedCert]?.image}
                     alt={certifications[selectedCert]?.name}
                     className="w-full h-auto object-contain"
                   />
