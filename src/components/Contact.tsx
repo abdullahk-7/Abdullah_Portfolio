@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle, AlertCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
@@ -13,6 +13,36 @@ const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const checkDemoParam = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const demoParam = urlParams.get('demo');
+      if (demoParam && (demoParam === 'request-demo-phishaware' || demoParam === 'request-demo-safeshe' || demoParam === 'request-demo-password-manager')) {
+        setFormData(prev => ({
+          ...prev,
+          subject: demoParam
+        }));
+        urlParams.delete('demo');
+        const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+        window.history.replaceState({}, '', newUrl);
+      }
+    };
+
+    checkDemoParam();
+
+    const handlePopState = () => {
+      checkDemoParam();
+    };
+    window.addEventListener('popstate', handlePopState);
+
+    const interval = setInterval(checkDemoParam, 500);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      clearInterval(interval);
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -294,6 +324,9 @@ const Contact: React.FC = () => {
                       <option value="incident-response">Incident Response</option>
                       <option value="consultation">Security Consultation</option>
                       <option value="collaboration">Collaboration Opportunity</option>
+                      <option value="request-demo-phishaware">Request Demo for PhishAware</option>
+                      <option value="request-demo-safeshe">Request Demo for SafeShe</option>
+                      <option value="request-demo-password-manager">Request Demo for Password Manager</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
@@ -310,7 +343,7 @@ const Contact: React.FC = () => {
                       required
                       rows={6}
                       className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-colors duration-200 resize-vertical"
-                      placeholder="Tell me about your cybersecurity needs, project requirements, or any questions you have..."
+                      placeholder="Enter your message here..."
                     />
                   </div>
 

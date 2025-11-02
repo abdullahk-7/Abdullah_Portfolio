@@ -1,28 +1,41 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Award, Calendar, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Award, Calendar, ExternalLink, X } from 'lucide-react';
 import cert1 from '../images/cer1.png'; 
 import cert2 from '../images/cert2.jpeg'; 
-
-import { image } from 'framer-motion/client';
+import googleCyber from '../images/Google_Cyber.png';
+import introToCyber from '../images/Intro_to_Cyber.png';
+import socLevel1 from '../images/SOC_Level_1.png';
+import introToAI from '../images/Intro_to_AI.png';
 
 const Certifications: React.FC = () => {
+  const [selectedCert, setSelectedCert] = useState<number | null>(null);
+
+  // Close modal on ESC key press
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedCert(null);
+      }
+    };
+    if (selectedCert !== null) {
+      document.addEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedCert]);
   
   const certifications = [
-    {
-      name: 'CompTIA Security+',
-      issuer: 'CompTIA',
-      year: '2025',
-      description: 'Foundational cybersecurity skills and knowledge',
-      badge: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=200',
-      verified: false
-    },
+   
     {
       name: 'SOC Level 1 — TryHackMe',
       issuer: 'Try Hack Me',
       year: '2025',
       description: 'An introductory hands-on course covering SIEM monitoring, log analysis, threat detection, and incident response fundamentals.',
-      badge: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=200',
+      image: socLevel1,
       verified: true
     },
     {
@@ -30,7 +43,7 @@ const Certifications: React.FC = () => {
       issuer: 'Coursera',
       year: '2025',
       description: 'A comprehensive program that introduces core cybersecurity concepts, common threats, vulnerabilities, and industry best practices for safeguarding systems, networks, and data.',
-      badge: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=200',
+      image: googleCyber,
       verified: true
     },
     {
@@ -38,7 +51,15 @@ const Certifications: React.FC = () => {
       issuer: 'Coursera',
       year: '2023',
       description: 'Introduction to Cybersecurity – A foundational course covering key security concepts, threats, vulnerabilities, and best practices for protecting systems and data.',
-      badge: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=200',
+      image: introToCyber,
+      verified: true
+    },
+    {
+      name: 'Introduction to AI',
+      issuer: 'Coursera',
+      year: '2023',
+      description: 'Introduction to AI – A foundational course covering artificial intelligence concepts, machine learning fundamentals, and AI applications.',
+      image: introToAI,
       verified: true
     },
     {
@@ -127,7 +148,10 @@ const Certifications: React.FC = () => {
                   {cert.description}
                 </p>
 
-                <button className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors duration-200">
+                <button 
+                  onClick={() => setSelectedCert(index)}
+                  className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors duration-200"
+                >
                   <ExternalLink className="w-4 h-4" />
                   <span className="text-sm font-medium">View Certificate</span>
                 </button>
@@ -149,11 +173,11 @@ const Certifications: React.FC = () => {
             <div className="text-gray-400">Total Certifications</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-green-400 mb-2">4</div>
+            <div className="text-3xl font-bold text-green-400 mb-2">6</div>
             <div className="text-gray-400">Verified Certs</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-purple-400 mb-2">2</div>
+            <div className="text-3xl font-bold text-purple-400 mb-2">0</div>
             <div className="text-gray-400">In Progress</div>
           </div>
           <div className="text-center">
@@ -162,6 +186,69 @@ const Certifications: React.FC = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Certificate Modal/Lightbox */}
+      <AnimatePresence>
+        {selectedCert !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedCert(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative max-w-4xl max-h-[90vh] w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedCert(null)}
+                className="absolute -top-12 right-0 text-white hover:text-cyan-400 transition-colors duration-200 z-10"
+                aria-label="Close"
+              >
+                <X className="w-8 h-8" />
+              </button>
+
+              {/* Certificate Image Container */}
+              <div className="bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
+                <div className="overflow-auto max-h-[90vh]">
+                  <img
+                    src={certifications[selectedCert]?.badge || certifications[selectedCert]?.image}
+                    alt={certifications[selectedCert]?.name}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+                
+                {/* Certificate Info */}
+                <div className="p-6 bg-gray-900 border-t border-gray-700">
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {certifications[selectedCert]?.name}
+                  </h3>
+                  <div className="flex items-center text-gray-400 text-sm space-x-4">
+                    <span className="font-medium text-purple-400">
+                      {certifications[selectedCert]?.issuer}
+                    </span>
+                    <div className="flex items-center space-x-1">
+                      <Calendar className="w-4 h-4" />
+                      <span>{certifications[selectedCert]?.year}</span>
+                    </div>
+                    {certifications[selectedCert]?.verified && (
+                      <div className="bg-green-500 text-white text-xs px-2 py-1 rounded-full flex items-center space-x-1">
+                        <Award className="w-3 h-3" />
+                        <span>Verified</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

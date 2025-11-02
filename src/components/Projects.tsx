@@ -1,48 +1,52 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Shield, Network, Search, AlertTriangle } from 'lucide-react';
+import { Github, ExternalLink, Shield, Mail, Lock, Award, MapPin, Radio, Users, Eye, Key, Cloud } from 'lucide-react';
 
 const Projects: React.FC = () => {
   const projects = [
     {
-      title: 'SOC Automation Dashboard',
-      description: 'A comprehensive security operations dashboard with real-time threat monitoring, automated incident response, and customizable alerting system.',
-      image: 'https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tech: ['Python', 'Splunk', 'Flask', 'JavaScript'],
-      features: ['Real-time monitoring', 'Automated alerts', 'Incident tracking', 'Custom dashboards'],
+      title: 'SafeShe (FYP – 1st Place, Faculty of CSE)',
+      description: 'A mobile application designed to enhance women\'s safety through real-time alerting, community engagement, and AI-based voice recognition.',
+      tech: ['Flutter', 'Firebase', 'Python (CNN)', 'Google Maps API'],
+      features: [
+        'LawPath: Guides users about women\'s protection laws',
+        'SOS Button: Sends live GPS coordinates to family and police',
+        'Community Feature: Enables nearby users to receive SOS alerts',
+        'Voice Recognition: CNN model detects emergency keywords',
+        'SafeZones: Alerts users when entering areas with previous incidents',
+        'Secure Login/Signup: Firebase authentication with encryption'
+      ],
       icon: Shield,
-      category: 'SOC Tools',
-      status: 'Completed'
+      category: 'Mobile Security App',
+      demoSubject: 'request-demo-safeshe'
     },
     {
-      title: 'Network Traffic Analyzer',
-      description: 'Advanced network packet analysis tool with machine learning capabilities for detecting anomalous traffic patterns and potential security threats.',
-      image: 'https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tech: ['Python', 'Wireshark', 'Scapy', 'TensorFlow'],
-      features: ['Packet analysis', 'ML threat detection', 'Traffic visualization', 'Alert system'],
-      icon: Network,
-      category: 'Network Security',
-      status: 'In Progress'
+      title: 'PhishAware (Python, CareCloud)',
+      description: 'A Python-based internal security automation system for ~3,000 HIPAA-regulated users, simulating phishing attacks to enhance employee awareness and compliance.',
+      tech: ['Python', 'Flask', 'HTML/CSS', 'SMTP', 'SQLite'],
+      features: [
+        'Automated phishing campaigns via SMTP',
+        'Click-tracking and analytics dashboard',
+        'Auto-assigned user training modules',
+        'HIPAA-compliant data handling and reporting'
+      ],
+      icon: Mail,
+      category: 'Internal Security Platform',
+      demoSubject: 'request-demo-phishaware'
     },
     {
-      title: 'Threat Intelligence Platform',
-      description: 'Centralized threat intelligence aggregation platform that collects, analyzes, and correlates threat data from multiple sources.',
-      image: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tech: ['Python', 'REST APIs', 'MongoDB', 'React'],
-      features: ['Multi-source integration', 'IOC management', 'Threat correlation', 'API endpoints'],
-      icon: Search,
-      category: 'Threat Intelligence',
-      status: 'Completed'
-    },
-    {
-      title: 'Vulnerability Scanner',
-      description: 'Automated vulnerability assessment tool with comprehensive reporting and integration with ticketing systems for remediation tracking.',
-      image: 'https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tech: ['Python', 'Nessus API', 'PostgreSQL', 'Docker'],
-      features: ['Automated scanning', 'Report generation', 'Risk scoring', 'Integration APIs'],
-      icon: AlertTriangle,
-      category: 'Vulnerability Management',
-      status: 'Completed'
+      title: 'Password Manager (Python)',
+      description: 'A secure, offline-first password manager with end-to-end encryption, automatic credential sync, and brute-force protection.',
+      tech: ['Python', 'PyCryptodome', 'Tkinter', 'SQLite', 'Cloud APIs'],
+      features: [
+        'AES-256 encryption for stored credentials',
+        'Local and cloud synchronization',
+        'Autofill for 50+ websites',
+        'Self-destruct after failed login attempts'
+      ],
+      icon: Lock,
+      category: 'Encrypted Credential Management',
+      demoSubject: 'request-demo-password-manager'
     }
   ];
 
@@ -56,79 +60,67 @@ const Projects: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Projects & Portfolio
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent font-inter">
+            Cybersecurity & Systems Engineering Projects
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto"></div>
-          <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
+          <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-cyan-400 mx-auto"></div>
+          <p className="text-gray-400 mt-6 max-w-2xl mx-auto font-inter">
             Innovative cybersecurity solutions and tools developed to enhance security operations and threat detection capabilities.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {projects.slice(0, 2).map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-cyan-400 transition-all duration-300 group"
+              className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-green-400 transition-all duration-300 group hover:shadow-lg hover:shadow-green-400/20"
             >
               <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                {/* Placeholder for image - 16:9 ratio */}
+                <div className="w-full aspect-video bg-white border-b border-gray-700 flex items-center justify-center">
+                  <div className="text-gray-400 text-sm font-inter">Image Placeholder</div>
+                </div>
                 
                 <div className="absolute top-4 left-4 flex items-center space-x-2">
-                  <project.icon className="w-6 h-6 text-cyan-400" />
-                  <span className="bg-gray-900/80 text-cyan-400 text-xs px-2 py-1 rounded-full">
+                  <project.icon className="w-6 h-6 text-green-400" />
+                  <span className="bg-gray-900/90 text-green-400 text-xs px-3 py-1 rounded-full font-inter font-medium">
                     {project.category}
-                  </span>
-                </div>
-
-                <div className="absolute top-4 right-4">
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    project.status === 'Completed' 
-                      ? 'bg-green-500/20 text-green-400' 
-                      : 'bg-yellow-500/20 text-yellow-400'
-                  }`}>
-                    {project.status}
                   </span>
                 </div>
               </div>
 
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
+              <div className="p-6 font-inter">
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors duration-300 font-inter">
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-300 mb-4 leading-relaxed">
+                <p className="text-gray-300 mb-4 leading-relaxed text-sm">
                   {project.description}
                 </p>
 
                 <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-purple-400 mb-2">Key Features:</h4>
-                  <div className="grid grid-cols-2 gap-1">
+                  <h4 className="text-sm font-semibold text-green-400 mb-3 font-inter">Key Features:</h4>
+                  <div className="space-y-2">
                     {project.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="text-sm text-gray-400 flex items-center">
-                        <div className="w-1 h-1 bg-cyan-400 rounded-full mr-2"></div>
-                        {feature}
+                      <div key={featureIndex} className="text-sm text-gray-400 flex items-start">
+                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-2 mt-1.5 flex-shrink-0"></div>
+                        <span>{feature}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-purple-400 mb-2">Technologies:</h4>
+                  <h4 className="text-sm font-semibold text-green-400 mb-2 font-inter">Technologies:</h4>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="bg-gray-700 text-gray-300 text-xs px-2 py-1 rounded-full"
+                        className="bg-gray-700/50 text-gray-300 text-xs px-3 py-1 rounded-full border border-gray-600 font-inter"
                       >
                         {tech}
                       </span>
@@ -137,13 +129,25 @@ const Projects: React.FC = () => {
                 </div>
 
                 <div className="flex space-x-4">
-                  <button className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors duration-200">
+                  <button className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors duration-200 hover:shadow-lg hover:shadow-green-400/30 px-3 py-2 rounded-lg hover:bg-green-400/10 font-inter font-medium">
                     <Github className="w-4 h-4" />
-                    <span className="text-sm font-medium">View Code</span>
+                    <span className="text-sm">View Code</span>
                   </button>
-                  <button className="flex items-center space-x-2 text-purple-400 hover:text-purple-300 transition-colors duration-200">
+                  <button 
+                    onClick={() => {
+                      const url = new URL(window.location.href);
+                      url.searchParams.set('demo', project.demoSubject);
+                      window.history.pushState({}, '', url);
+                      
+                      const element = document.getElementById('contact');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors duration-200 hover:shadow-lg hover:shadow-cyan-400/30 px-3 py-2 rounded-lg hover:bg-cyan-400/10 font-inter font-medium"
+                  >
                     <ExternalLink className="w-4 h-4" />
-                    <span className="text-sm font-medium">Live Demo</span>
+                    <span className="text-sm">Request Demo</span>
                   </button>
                 </div>
               </div>
@@ -151,18 +155,95 @@ const Projects: React.FC = () => {
           ))}
         </div>
 
-        {/* View More Projects Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200">
-            View All Projects
-          </button>
-        </motion.div>
+        {/* Third Project - Centered */}
+        {(() => {
+          const thirdProject = projects[2];
+          const ThirdProjectIcon = thirdProject.icon;
+          return (
+            <div className="max-w-6xl mx-auto mt-8">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-green-400 transition-all duration-300 group hover:shadow-lg hover:shadow-green-400/20 max-w-2xl mx-auto"
+              >
+                <div className="relative overflow-hidden">
+                  {/* Placeholder for image - 16:9 ratio */}
+                  <div className="w-full aspect-video bg-white/5 border-b border-gray-700 flex items-center justify-center">
+                    <div className="text-gray-600 text-sm font-inter">Image Placeholder</div>
+                  </div>
+                  
+                  <div className="absolute top-4 left-4 flex items-center space-x-2">
+                    <ThirdProjectIcon className="w-6 h-6 text-green-400" />
+                    <span className="bg-gray-900/90 text-green-400 text-xs px-3 py-1 rounded-full font-inter font-medium">
+                      {thirdProject.category}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6 font-inter">
+                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-green-400 transition-colors duration-300 font-inter">
+                    {thirdProject.title}
+                  </h3>
+                  
+                  <p className="text-gray-300 mb-4 leading-relaxed text-sm">
+                    {thirdProject.description}
+                  </p>
+
+                  <div className="mb-4">
+                    <h4 className="text-sm font-semibold text-green-400 mb-3 font-inter">Key Features:</h4>
+                    <div className="space-y-2">
+                      {thirdProject.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="text-sm text-gray-400 flex items-start">
+                          <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-2 mt-1.5 flex-shrink-0"></div>
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-green-400 mb-2 font-inter">Technologies:</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {thirdProject.tech.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="bg-gray-700/50 text-gray-300 text-xs px-3 py-1 rounded-full border border-gray-600 font-inter"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <button className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors duration-200 hover:shadow-lg hover:shadow-green-400/30 px-3 py-2 rounded-lg hover:bg-green-400/10 font-inter font-medium">
+                      <Github className="w-4 h-4" />
+                      <span className="text-sm">View Code</span>
+                    </button>
+                    <button 
+                      onClick={() => {
+                        const url = new URL(window.location.href);
+                        url.searchParams.set('demo', thirdProject.demoSubject);
+                        window.history.pushState({}, '', url);
+                        
+                        const element = document.getElementById('contact');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className="flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors duration-200 hover:shadow-lg hover:shadow-cyan-400/30 px-3 py-2 rounded-lg hover:bg-cyan-400/10 font-inter font-medium"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span className="text-sm">Request Demo</span>
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          );
+        })()}
       </div>
     </section>
   );
