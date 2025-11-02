@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="mailto:abdulah.khan@hotmail.com"
+                href="mailto:khan.abdulah@hotmail.com"
                 className="text-gray-400 hover:text-green-400 transition-colors duration-200"
               >
                 <Mail className="w-5 h-5" />
@@ -105,7 +105,7 @@ const Footer: React.FC = () => {
             <div className="space-y-2 text-sm">
               <p className="text-gray-400">
                 <span className="text-cyan-400">Email:</span><br />
-                abdulah.khan@hotmail.com
+                khan.abdulah@hotmail.com
               </p>
               <p className="text-gray-400">
                 <span className="text-cyan-400">Phone:</span><br />
