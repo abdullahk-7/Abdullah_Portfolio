@@ -1,8 +1,29 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Github, ExternalLink, Shield, Mail, Lock, Award, MapPin, Radio, Users, Eye, Key, Cloud } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Image as ImageIcon, ExternalLink, Shield, Mail, Lock, X } from 'lucide-react';
+import safesheImage from '../images/SafeShe_Poster_Main.jpg';
+import phishawareImage from '../images/PhishAware.jpeg';
+import ciphervaultImage from '../images/CipherVault.jpeg';
 
 const Projects: React.FC = () => {
+  const [selectedPoster, setSelectedPoster] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedPoster(null);
+      }
+    };
+    if (selectedPoster !== null) {
+      document.addEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedPoster]);
+  
   const projects = [
     {
       title: 'SafeShe (FYP – 1st Place, Faculty of CSE)',
@@ -18,7 +39,8 @@ const Projects: React.FC = () => {
       ],
       icon: Shield,
       category: 'Mobile Security App',
-      demoSubject: 'request-demo-safeshe'
+      demoSubject: 'request-demo-safeshe',
+      image: safesheImage
     },
     {
       title: 'PhishAware (Python, CareCloud)',
@@ -32,7 +54,8 @@ const Projects: React.FC = () => {
       ],
       icon: Mail,
       category: 'Internal Security Platform',
-      demoSubject: 'request-demo-phishaware'
+      demoSubject: 'request-demo-phishaware',
+      image: phishawareImage
     },
     {
       title: 'Password Manager (Python)',
@@ -46,7 +69,8 @@ const Projects: React.FC = () => {
       ],
       icon: Lock,
       category: 'Encrypted Credential Management',
-      demoSubject: 'request-demo-password-manager'
+      demoSubject: 'request-demo-password-manager',
+      image: ciphervaultImage
     }
   ];
 
@@ -80,10 +104,12 @@ const Projects: React.FC = () => {
               className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-green-400 transition-all duration-300 group hover:shadow-lg hover:shadow-green-400/20"
             >
               <div className="relative overflow-hidden">
-                {/* Placeholder for image - 16:9 ratio */}
-                <div className="w-full aspect-video bg-white border-b border-gray-700 flex items-center justify-center">
-                  <div className="text-gray-400 text-sm font-inter">Image Placeholder</div>
-                </div>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 
                 <div className="absolute top-4 left-4 flex items-center space-x-2">
                   <project.icon className="w-6 h-6 text-green-400" />
@@ -129,9 +155,12 @@ const Projects: React.FC = () => {
                 </div>
 
                 <div className="flex space-x-4">
-                  <button className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors duration-200 hover:shadow-lg hover:shadow-green-400/30 px-3 py-2 rounded-lg hover:bg-green-400/10 font-inter font-medium">
-                    <Github className="w-4 h-4" />
-                    <span className="text-sm">View Code</span>
+                  <button 
+                    onClick={() => setSelectedPoster(index)}
+                    className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors duration-200 hover:shadow-lg hover:shadow-green-400/30 px-3 py-2 rounded-lg hover:bg-green-400/10 font-inter font-medium"
+                  >
+                    <ImageIcon className="w-4 h-4" />
+                    <span className="text-sm">View Poster</span>
                   </button>
                   <button 
                     onClick={() => {
@@ -169,10 +198,12 @@ const Projects: React.FC = () => {
                 className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 hover:border-green-400 transition-all duration-300 group hover:shadow-lg hover:shadow-green-400/20 max-w-2xl mx-auto"
               >
                 <div className="relative overflow-hidden">
-                  {/* Placeholder for image - 16:9 ratio */}
-                  <div className="w-full aspect-video bg-white/5 border-b border-gray-700 flex items-center justify-center">
-                    <div className="text-gray-600 text-sm font-inter">Image Placeholder</div>
-                  </div>
+                  <img
+                    src={thirdProject.image}
+                    alt={thirdProject.title}
+                    className="w-full aspect-video object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                   
                   <div className="absolute top-4 left-4 flex items-center space-x-2">
                     <ThirdProjectIcon className="w-6 h-6 text-green-400" />
@@ -218,9 +249,12 @@ const Projects: React.FC = () => {
                   </div>
 
                   <div className="flex space-x-4">
-                    <button className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors duration-200 hover:shadow-lg hover:shadow-green-400/30 px-3 py-2 rounded-lg hover:bg-green-400/10 font-inter font-medium">
-                      <Github className="w-4 h-4" />
-                      <span className="text-sm">View Code</span>
+                    <button 
+                      onClick={() => setSelectedPoster(2)}
+                      className="flex items-center space-x-2 text-green-400 hover:text-green-300 transition-colors duration-200 hover:shadow-lg hover:shadow-green-400/30 px-3 py-2 rounded-lg hover:bg-green-400/10 font-inter font-medium"
+                    >
+                      <ImageIcon className="w-4 h-4" />
+                      <span className="text-sm">View Poster</span>
                     </button>
                     <button 
                       onClick={() => {
@@ -245,6 +279,54 @@ const Projects: React.FC = () => {
           );
         })()}
       </div>
+
+      {/* Poster Modal/Lightbox */}
+      <AnimatePresence>
+        {selectedPoster !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedPoster(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative max-w-5xl max-h-[90vh] w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedPoster(null)}
+                className="absolute -top-12 right-0 text-white hover:text-green-400 transition-colors duration-200 z-10"
+                aria-label="Close"
+              >
+                <X className="w-8 h-8" />
+              </button>
+
+              <div className="bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
+                <div className="overflow-auto max-h-[90vh]">
+                  <img
+                    src={projects[selectedPoster]?.image}
+                    alt={projects[selectedPoster]?.title}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+                
+                <div className="p-6 bg-gray-900 border-t border-gray-700">
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {projects[selectedPoster]?.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    {projects[selectedPoster]?.category}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

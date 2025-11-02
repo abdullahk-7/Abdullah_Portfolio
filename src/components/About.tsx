@@ -54,7 +54,7 @@ const About: React.FC = () => {
             
             <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
               <p>
-              Welcome to my digital fortress! 👨‍💻
+              Welcome to my digital fortress! 
               I’m Abdullah Khan, a dedicated Junior SOC Analyst with hands-on experience in protecting digital assets and responding to evolving cyber threats.
               </p>
               

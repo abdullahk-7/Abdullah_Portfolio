@@ -29,7 +29,6 @@ const Certifications: React.FC = () => {
   }, [selectedCert]);
   
   const certifications = [
-   
     {
       name: 'SOC Level 1 — TryHackMe',
       issuer: 'Try Hack Me',
@@ -73,7 +72,7 @@ const Certifications: React.FC = () => {
     {
       name: 'Certificate of Appreciation',
       issuer: 'Adeel Sarwar, Chief Technology Officer, CareCloud',
-      year: '2024',
+      year: '2025',
       description: 'Acknowledged for leveraging cybersecurity expertise and automation skills to enhance security operations, including SIEM monitoring, EDR analysis, and SOAR platform evaluation.',
       image: cert1, // store imported image,
       verified: true
@@ -112,7 +111,7 @@ const Certifications: React.FC = () => {
             >
               <div className="relative">
                 <img
-                  src={cert.badge || cert.image}
+                  src={cert.image || cert.badge}
                   alt={cert.name}
                   className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                 />
@@ -217,7 +216,7 @@ const Certifications: React.FC = () => {
               <div className="bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
                 <div className="overflow-auto max-h-[90vh]">
                   <img
-                    src={certifications[selectedCert]?.badge || certifications[selectedCert]?.image}
+                    src={certifications[selectedCert]?.image || certifications[selectedCert]?.badge}
                     alt={certifications[selectedCert]?.name}
                     className="w-full h-auto object-contain"
                   />
